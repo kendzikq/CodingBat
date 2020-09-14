@@ -34,4 +34,19 @@ public class Warmup1 {
     public boolean makes10(int a, int b) {
         return a == 10 || b == 10 || a + b == 10;
     }
+
+    public boolean nearHundred(int n) {
+        return (Math.abs(100 - n) <= 10 || (Math.abs(200 - n) <= 10));
+    }
+
+    public boolean posNeg(int a, int b, boolean negative) {
+        return negative ? a < 0 && b < 0 : (a > 0 && b < 0) || (a < 0 && b > 0);
+    }
+
+    public String notString(String str) {
+        if (str.length() >= 3 && "not".equals(str.substring(0, 3))) {
+            return str;
+        }
+        return "not " + str;
+    }
 }

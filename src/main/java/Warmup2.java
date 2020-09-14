@@ -31,4 +31,27 @@ public class Warmup2 {
         }
         return counter;
     }
+
+    boolean doubleX(String str) {
+        int firstX = str.indexOf('x');
+        if ((firstX + 1) != str.length() && firstX >= 0 && (str.charAt(firstX + 1) == 'x'))
+            return true;
+        return false;
+    }
+
+    public String stringBits(String str) {
+        String result = "";
+        for (int i = 0; i < str.length(); i += 2) {
+            result = result + str.charAt(i);
+        }
+        return result;
+    }
+
+    public String stringSplosion(String str) {
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            result += str.substring(0, i + 1);
+        }
+        return result;
+    }
 }
