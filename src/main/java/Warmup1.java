@@ -1,3 +1,5 @@
+import java.util.StringJoiner;
+
 public class Warmup1 {
 
     // The parameter weekday is true if it is a weekday, and the parameter vacation is true if we
@@ -69,4 +71,28 @@ public class Warmup1 {
         }
         return "not " + str;
     }
+
+    // Given a non-empty string and an int n, return a new string where the char at index n has
+    // been removed. The value of n will be a valid index of a char in the original string (i.e. n will
+    // be in the range 0..str.length()-1 inclusive).
+    public String missingChar(String str, int n) {
+        StringJoiner joiner = new StringJoiner("");
+        return joiner.add(str.substring(0, n)).add(str.substring(n + 1, str.length())).toString();
+    }
+
+    // Given a string, return a new string where the first and last chars have been exchanged.
+    public String frontBack(String str) {
+        if (str.length() < 2)
+            return str;
+        return str.charAt(str.length() - 1) + str.substring(1, str.length() - 1) + str.charAt(0);
+    }
+
+    // Given a string, we'll say that the front is the first 3 chars of the string. If the string length
+    // is less than 3, the front is whatever is there. Return a new string which is 3 copies of the front.
+    public String front3(String str) {
+        String front = str.length() > 3 ? str.substring(0, 3) : str;
+        return front + front + front;
+    }
+
+
 }
