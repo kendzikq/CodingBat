@@ -94,5 +94,45 @@ public class Warmup1 {
         return front + front + front;
     }
 
+    // Given a string, take the last char and return a new string with the last char added at the
+    // front and back, so "cat" yields "tcatt". The original string will be length 1 or more.
+    public String backAround(String str) {
+        StringJoiner joiner = new StringJoiner("");
+        return joiner.add(str.substring(str.length() - 1)).add(str).add(str.substring(str.length() - 1)).toString();
+    }
+
+    // Return true if the given non-negative number is a multiple of 3 or a multiple of 5. Use the
+    // % "mod" operator -- see Introduction to Mod
+    public boolean or35(int n) {
+        return n % 3 == 0 || n % 5 == 0;
+    }
+
+    // Given a string, take the first 2 chars and return the string with the 2 chars added at both
+    // the front and back, so "kitten" yields"kikittenki". If the string length is less than 2, use
+    // whatever chars are there.
+    public String front22(String str) {
+        String sub = str.length() < 2 ? str : str.substring(0, 2);
+        return sub + str + sub;
+    }
+
+    // Given a string, return true if the string starts with "hi" and false otherwise.
+    public boolean startHi(String str) {
+        StringJoiner joiner = new StringJoiner("");
+        if (str.length() < 2)
+            return false;
+        return "hi".equals(joiner.add(str.substring(0, 2)).toString()) ? true : false;
+    }
+
+    // Given two temperatures, return true if one is less than 0 and the other is greater than 100.
+    public boolean icyHot(int temp1, int temp2) {
+        return (temp1 < 0 && temp2 > 100) || (temp2 < 0 && temp1 > 100);
+    }
+
+    // Given 2 int values, return true if either of them is in the range 10..20 inclusive.
+    public boolean in1020(int a, int b) {
+        return (a >= 10 && a <= 20)
+                || (b >= 10 && b <= 20);
+    }
+
 
 }
