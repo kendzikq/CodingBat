@@ -134,5 +134,41 @@ public class Warmup1 {
                 || (b >= 10 && b <= 20);
     }
 
+    // We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 3 int values,
+    // return true if 1 or more of them are teen.
+    //
+    // hasTeen(13, 20, 10) → true
+    // hasTeen(20, 19, 10) → true
+    // hasTeen(20, 10, 13) → true
+    public boolean hasTeen(int a, int b, int c) {
+        return (a >= 13 && a <= 19) ||
+                (b >= 13 && b <= 19) ||
+                (c >= 13 && c <= 19);
+    }
 
+    // We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 2 int values,
+    // return true if one or the other is teen, but not both.
+    //
+    // loneTeen(13, 99) → true
+    // loneTeen(21, 19) → true
+    // loneTeen(13, 13) → false
+    public boolean loneTeen(int a, int b) {
+        boolean st1 = a >= 13 && a <= 19;
+        boolean st2 = b >= 13 && b <= 19;
+        return st1 ^ st2;
+    }
+
+    // Given a string, if the string "del" appears starting at index 1, return a string where that
+    // "del" has been deleted. Otherwise, return the string unchanged.
+    //
+    // delDel("adelbc") → "abc"
+    // delDel("adelHello") → "aHello"
+    // delDel("adedbc") → "adedbc"
+    public String delDel(String str) {
+        final String del = "del";
+        if (str.length() >= 4 && str.substring(1, 4).contains(del)) {
+            return str.substring(0, 1) + str.substring(4);
+        }
+        return str;
+    }
 }
