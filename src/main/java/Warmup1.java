@@ -274,4 +274,72 @@ public class Warmup1 {
 
         return isAInRange ? a : isBInRange ? b : 0;
     }
+
+    /*
+    Return true if the given string contains between 1 and 3 'e' chars.
+
+    stringE("Hello") → true
+    stringE("Heelle") → true
+    stringE("Heelele") → false
+     */
+    public boolean stringE(String str) {
+        int counter = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'e') {
+                counter++;
+            }
+        }
+
+        return counter >= 1 && counter <= 3;
+    }
+
+    /*
+    Given two non-negative int values, return true if they have the same last digit, such as
+    with 27 and 57. Note that the % "mod" operator computes remainders, so 17 % 10 is 7.
+
+    lastDigit(7, 17) → true
+    lastDigit(6, 17) → false
+    lastDigit(3, 113) → true
+     */
+    public boolean lastDigit(int a, int b) {
+        return a % 10 == b % 10;
+    }
+
+    /*
+    Given a string, return a new string where the last 3 chars are now in upper case.
+    If the string has less than 3 chars, uppercase whatever is there. Note that str.toUpperCase()
+    returns the uppercase version of a string.
+
+    endUp("Hello") → "HeLLO"
+    endUp("hi there") → "hi thERE"
+    endUp("hi") → "HI"
+     */
+    public String endUp(String str) {
+
+        if (str.length() < 3) {
+            return str.toUpperCase();
+        }
+
+        return str.substring(0, str.length() - 3) + str.substring(str.length() - 3).toUpperCase();
+    }
+
+    /*
+    Given a non-empty string and an int N, return the string made starting with char 0, and
+    then every Nth char of the string. So if N is 3, use char 0, 3, 6, ... and so on. N is 1 or
+    more.
+
+    everyNth("Miracle", 2) → "Mrce"
+    everyNth("abcdefg", 2) → "aceg"
+    everyNth("abcdefg", 3) → "adg"
+     */
+    public String everyNth(String str, int n) {
+        String result = "";
+
+        for (int i = 0; i < str.length(); i += n) {
+            result += str.charAt(i);
+        }
+
+        return result;
+    }
 }
