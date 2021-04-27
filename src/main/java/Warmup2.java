@@ -182,4 +182,101 @@ public class Warmup2 {
 
         return beginning + middle + end;
     }
+
+
+    /*
+    Given a string, return a string made of the chars at indexes 0,1, 4,5, 8,9 ... so "kittens"
+    yields "kien".
+
+    altPairs("kitten") → "kien"
+    altPairs("Chocolate") → "Chole"
+    altPairs("CodingHorror") → "Congrr"
+     */
+    public String altPairs(String str) {
+        String result = "";
+
+        for (int i = 0; i < str.length(); i += 4) {
+            if (str.length() == i + 1) {
+                result += str.charAt(i);
+                break;
+            }
+            result += str.substring(i, i + 2);
+        }
+        return result;
+    }
+
+    /*
+    Suppose the string "yak" is unlucky. Given a string, return a version where all the "yak"
+    are removed, but the "a" can be any char. The "yak" strings will not overlap.
+
+    stringYak("yakpak") → "pak"
+    stringYak("pakyak") → "pak"
+    stringYak("yak123ya") → "123ya"
+     */
+    public String stringYak(String str) {
+        String pattern = "yak";
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            if (i + 2 < str.length() && str.substring(i, i + 3).equals(pattern)) {
+                i += 2;
+                continue;
+            }
+            result = result + str.substring(i, i + 1);
+        }
+        return result;
+    }
+
+    /*
+    Given an array of ints, return the number of times that two 6's are next to each other in
+    the array. Also count instances where the second "6" is actually a 7.
+
+    array667([6, 6, 2]) → 1
+    array667([6, 6, 2, 6]) → 1
+    array667([6, 7, 2, 6]) → 1
+     */
+    public int array667(int[] nums) {
+        int counter = 0;
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == 6 && (nums[i + 1] == 6 || nums[i + 1] == 7)) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /*
+    Given an array of ints, we'll say that a triple is a value appearing 3 times in a row in the
+    array. Return true if the array does not contain any triples.
+
+    noTriples([1, 1, 2, 2, 1]) → true
+    noTriples([1, 1, 2, 2, 2, 1]) → false
+    noTriples([1, 1, 1, 2, 2, 2, 1]) → false
+     */
+    public boolean noTriples(int[] nums) {
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] == nums[i + 1] && nums[i] == nums[i + 2]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+    Given an array of ints, return true if it contains a 2, 7, 1 pattern: a value, followed by the
+    value plus 5, followed by the value minus 1. Additionally the 271 counts even if the "1"
+    differs by 2 or less from the correct value.
+
+    has271([1, 2, 7, 1]) → true
+    has271([1, 2, 8, 1]) → false
+    has271([2, 7, 1]) → true
+     */
+    public boolean has271(int[] nums) {
+        for (int i = 0; i + 2 < nums.length; i++) {
+            if ((nums[i + 1] == nums[i] + 5) && Math.abs(nums[i + 2] - (nums[i] - 1)) <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
