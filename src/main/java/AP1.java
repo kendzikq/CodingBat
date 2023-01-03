@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 public class AP1 {
 
-    // Given an array of scores, return true if each score is equal or greater than the one before.
-    // The array will be length 2 or more.
+    /**
+     * Given an array of scores, return true if each score is equal or greater than the one before.
+     * The array will be length 2 or more.
+     */
     public boolean scoresIncreasing(int[] scores) {
         int previous = scores[0];
         for (int i = 1; i < scores.length; i++) {
@@ -17,8 +19,10 @@ public class AP1 {
         return true;
     }
 
-    // Given an array of scores, return true if there are scores of 100 next to each other in the
-    // array. The array length will be at least 2.
+    /**
+     * Given an array of scores, return true if there are scores of 100 next to each other in the
+     * array. The array length will be at least 2.
+     */
     public boolean scores100(int[] scores) {
         for (int i = 0; i < scores.length - 1; i++) {
             if (scores[i] == 100 && scores[i + 1] == 100) {
@@ -28,8 +32,10 @@ public class AP1 {
         return false;
     }
 
-    // Given an array of scores sorted in increasing order, return true if the array contains 3
-    // adjacent scores that differ from each other by at most 2, such as with {3, 4, 5} or {3, 5, 5}
+    /**
+     * Given an array of scores sorted in increasing order, return true if the array contains 3
+     * adjacent scores that differ from each other by at most 2, such as with {3, 4, 5} or {3, 5, 5}
+     */
     public boolean scoresClump(int[] scores) {
         for (int i = 0; i < scores.length - 2; i++) {
             if (scores[i + 2] - scores[i] <= 2) { //scores are sorted in increasing order
@@ -39,14 +45,16 @@ public class AP1 {
         return false;
     }
 
-    // Given an array of scores, compute the int average of the first half and the second half, and
-    // return whichever is larger. We'll say that the second half begins at index length/2. The
-    // array length will be at least 2. To practice decomposition, write a separate helper method
-    // int average(int[] scores, int start, int end) { which computes the average of the
-    // elements between indexes start..end. Call your helper method twice to implement
-    // scoresAverage(). Write your helper method after your scoresAverage() method in the
-    // JavaBat text area. Normally you would compute averages with doubles, but here we use ints
-    // so the expected results are exact.
+    /**
+     * Given an array of scores, compute the int average of the first half and the second half, and
+     * return whichever is larger. We'll say that the second half begins at index length/2. The
+     * array length will be at least 2. To practice decomposition, write a separate helper method
+     * int average(int[] scores, int start, int end) { which computes the average of the
+     * elements between indexes start..end. Call your helper method twice to implement
+     * scoresAverage(). Write your helper method after your scoresAverage() method in the
+     * JavaBat text area. Normally you would compute averages with doubles, but here we use ints
+     * so the expected results are exact.
+     */
     public int scoresAverage(int[] scores) {
         int half1 = average(scores, 0, scores.length / 2);
         int half2 = average(scores, scores.length / 2, scores.length);
@@ -61,7 +69,9 @@ public class AP1 {
         return sum > 0 ? sum / (end - start) : 0;
     }
 
-    // Given an array of strings, return the count of the number of strings with the given length.
+    /**
+     * Given an array of strings, return the count of the number of strings with the given length.
+     */
     public int wordsCount(String[] words, int len) {
         int counter = 0;
         for (int i = 0; i < words.length; i++) {
@@ -323,4 +333,85 @@ public class AP1 {
         }
         return count;
     }
+
+    /**
+     * We have data for two users, A and B, each with a String name and an int id.
+     * The goal is to order the users such as for sorting. Return -1 if A comes before B,
+     * 1 if A comes after B, and 0 if they are the same. Order first by the string names,
+     * and then by the id numbers if the names are the same.
+     * Note: with Strings str1.compareTo(str2) returns an int value which is negative/0/positive
+     * to indicate how str1 is ordered to str2 (the value is not limited to -1/0/1).
+     * (On the AP, there would be two User objects, but here the code simply takes the two
+     * strings and two ints directly. The code logic is the same.)
+     */
+    public int userCompare(String aName, int aId, String bName, int bId) {
+        int compStrings = 0;
+        if (!((compStrings = aName.compareTo(bName)) == 0))
+            return compStrings > 0 ? 1 : -1;
+        if (aId == bId)
+            return 0;
+        return aId < bId ? -1 : 1;
+    }
+
+    /**
+     * Start with two arrays of strings, A and B, each with its elements in alphabetical
+     * order and without duplicates. Return a new array containing the first N elements from
+     * the two arrays. The result array should be in alphabetical order and without duplicates.
+     * A and B will both have a length which is N or more. The best "linear" solution makes
+     * a single pass over A and B, taking advantage of the fact that they are in alphabetical order,
+     * copying elements directly to the new array.
+     * mergeTwo(["a", "c", "z"], ["b", "f", "z"], 3) → ["a", "b", "c"]
+     * mergeTwo(["a", "c", "z"], ["c", "f", "z"], 3) → ["a", "c", "f"]
+     * mergeTwo(["f", "g", "z"], ["c", "f", "g"], 3) → ["c", "f", "g"]
+     */
+    public String[] mergeTwo(String[] a, String[] b, int n) {
+        String[] result = new String[n];
+        int i = 0;
+        int aIdx = 0;
+        int bIdx = 0;
+        while (i < n) {
+            if (a[aIdx].compareTo(b[bIdx]) < 0) {
+                result[i] = a[aIdx++];
+            } else if (a[aIdx].compareTo(b[bIdx]) > 0) {
+                result[i] = b[bIdx++];
+            } else {
+                result[i] = a[aIdx++];
+                bIdx++;
+            }
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Start with two arrays of strings, a and b, each in alphabetical order,
+     * possibly with duplicates. Return the count of the number of strings which appear in both arrays.
+     * The best "linear" solution makes a single pass over both arrays,
+     * taking advantage of the fact that they are in alphabetical order.
+     * commonTwo(["a", "c", "x"], ["b", "c", "d", "x"]) → 2
+     * commonTwo(["a", "c", "x"], ["a", "b", "c", "x", "z"]) → 3
+     * commonTwo(["a", "b", "c"], ["a", "b", "c"]) → 3
+     */
+    public int commonTwo(String[] a, String[] b) {
+        int count = 0;
+        int aIdx = 0;
+        int bIdx = 0;
+        String prev = "";
+        while (aIdx < a.length && bIdx < b.length) {
+            if (a[aIdx].equals(b[bIdx])) {
+                if (!a[aIdx].equals(prev)) {
+                    count++;
+                    prev = a[aIdx];
+                }
+                aIdx++;
+                bIdx++;
+            } else if (a[aIdx].compareTo(b[bIdx]) < 0) {
+                aIdx++;
+            } else {
+                bIdx++;
+            }
+        }
+        return count;
+    }
+
 }
