@@ -78,10 +78,12 @@ public class Recursion1 {
         return count7(n / 10);
     }
 
-    // Given a non-negative int n, compute recursively (no loops) the count of the occurrences of
-    // 8 as a digit, except that an 8 with another 8 immediately to its left counts double, so 8818
-    // yields 4. Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide
-    // (/) by 10 removes the rightmost digit (126 / 10 is 12).
+    /**
+     * Given a non-negative int n, compute recursively (no loops) the count of the occurrences of
+     * 8 as a digit, except that an 8 with another 8 immediately to its left counts double, so 8818
+     * yields 4. Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6), while divide
+     * (/) by 10 removes the rightmost digit (126 / 10 is 12).
+     */
     public int count8(int n) {
         if (n == 0) {
             return 0;
@@ -92,11 +94,13 @@ public class Recursion1 {
         if (n % 10 == 8) {
             return 1 + count8(n / 10);
         }
-        return 0 + count8(n / 10);
+        return count8(n / 10);
     }
 
-    // Given base and n that are both 1 or more, compute recursively (no loops) the value of
-    // base to the n power, so powerN(3, 2) is 9 (3 squared).
+    /**
+     * Given base and n that are both 1 or more, compute recursively (no loops) the value of
+     * base to the n power, so powerN(3, 2) is 9 (3 squared).
+     */
     public int powerN(int base, int n) {
         if (n == 0) {
             return 1;
@@ -104,20 +108,34 @@ public class Recursion1 {
         return base * powerN(base, n - 1);
     }
 
-    /*
-    Given a string, compute recursively (no loops) the number of lowercase 'x' chars in the string.
-
-    countX("xxhixx") → 4
-    countX("xhixhix") → 3
-    countX("hi") → 0
+    /**
+     * Given a string, compute recursively (no loops) the number of lowercase 'x' chars in the string.
+     * countX("xxhixx") → 4
+     * countX("xhixhix") → 3
+     * countX("hi") → 0
      */
     public int countX(String str) {
-        if (str.length() == 0) {
+        if (str == null || str.length() == 0) {
             return 0;
         }
         return (str.charAt(0) == 'x' ? 1 : 0) + countX(str.substring(1));
     }
 
-
+    /**
+     * Given a string, compute recursively (no loops) the number of times lowercase "hi"
+     * appears in the string.
+     * countHi("xxhixx") → 1
+     * countHi("xhixhix") → 2
+     * countHi("hi") → 1
+     */
+    public int countHi(String str) {
+        if (str == null || str.length() < 2) {
+            return 0;
+        }
+        if ("hi".equals(str.substring(0, 2))) {
+            return 1 + countHi(str.substring(2));
+        }
+        return countHi(str.substring(1));
+    }
 
 }
